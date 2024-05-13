@@ -9,7 +9,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import api from './api/posts';
-
+import useAxiosFetch from './hooks/useAxiosFetch';
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -21,7 +21,13 @@ function App() {
   const [editBody, setEditBody] = useState('');
   const navigate = useNavigate();
   //const history = useHistory();
+  const { data, fetchError, isLoading } = useAxiosFetch('http://localhost:3500/posts');
+  
+  useEffect(() => {    
+    setPosts(data);
+  }, [data])
 
+/* Redondant with useAxiosFetch
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -40,6 +46,7 @@ function App() {
 
     fetchPosts();
   })
+*/
 
   useEffect(() => {
     const filteredResults = posts.filter((post) =>
@@ -120,7 +127,11 @@ function App() {
           search={search}
           setSearch={setSearch}
         />}>
-          <Route index element={<Home posts={searchResults} />} />
+          <Route index element={<Home 
+            posts={searchResults} 
+            fetchError={fetchError}
+            isLoading={isLoading}
+          />} />
           <Route path="edit">
             <Route path="/edit/:id" element={<EditPost
               posts={posts}
