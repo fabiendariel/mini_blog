@@ -20,6 +20,17 @@ function App() {
   //const history = useHistory();
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await api.get('/posts');
+        
+      } catch (err) {
+
+      }
+    }
+  })
+
+  useEffect(() => {
     const filteredResults = posts.filter((post) =>
       ((post.body).toLowerCase()).includes(search.toLowerCase())
       || ((post.title).toLowerCase()).includes(search.toLowerCase()));
