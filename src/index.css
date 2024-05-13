@@ -205,12 +205,13 @@ body {
   cursor: pointer;
 }
 
-.Missing h2,
-.PostPage h2,
 .Missing p,
-.PostPage p {
-  margin-bottom: 1rem;
+.PostPage p,
+.newPost p,
+.editPost p {
+  margin-top: 1rem;
 }
+
 
 .PostPage button {
   height: 48px;
@@ -218,9 +219,17 @@ body {
   border-radius: 0.25rem;
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: red;
+  margin-right: 0.5rem;
   color: #fff;
   cursor: pointer;
+}
+
+.editButton {
+  background-color: #333;
+}
+
+.deleteButton {
+  background-color: red;
 }
 
 .statusMsg {
